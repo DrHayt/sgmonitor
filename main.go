@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 
+	"github.com/c9s/goprocinfo/linux"
 	"github.com/mgutz/logxi/v1"
 )
 
@@ -12,7 +13,15 @@ var logger log.Logger
 func main() {
 
 	logger = log.New("sgmonitor")
-	logger.Trace("I am about to call stuff")
+	logger.Trace("attempting to read /proc/cpuinfo")
+	cpuinfo, err := linux.ReadCPUInfo("proc/cpuinfo")
+	if err != nil {
+		logger.Fatal("Unable to get cpuinfo", "ReadCPUInfo")
+	}
+	logger.Trace("read cpuinfo")
+
+	logger.Info("We have this many cpus", "ReadCPUInfo", cpuinfo.Processors)
+
 	// logger.Debug("This is a debug log entry")
 	// logger.Info("This is a info log entry")
 	// logger.Warn("This is a warn log entry")
