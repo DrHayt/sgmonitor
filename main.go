@@ -29,7 +29,5 @@ func main() {
 	// logger.Fatal("This is a fatal log entry")
 	// logger.log("This is a generic log entry")
 
-	stuff(5)
 	logger.Trace("I called stuff")
-	fmt.Println(math.Pi)
 }
